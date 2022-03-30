@@ -5,7 +5,7 @@ function BurgerContent() {
 	const items = useContext(itemContext);
 	const [addedItems, setAddedItems] = useState([]);
 
-	useEffect(() => setAddedItems(() => items.filter((item) => item.count > 0)), items);
+	useEffect(() => setAddedItems(items.filter((item) => item.count > 0)), items);
 
 	return (
 		<div className="bgContent">

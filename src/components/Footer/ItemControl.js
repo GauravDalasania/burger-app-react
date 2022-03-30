@@ -1,28 +1,24 @@
-import { Component } from "react";
-import { itemContext } from "./../../App";
-import BurgerControlButtons from "./BurgerControlButtons";
+import { dcrItemContext, incItemContext } from "./../../App";
+import { useContext } from "react";
 
-class ItemControl extends Component {
-	constructor() {
-		super();
-	}
+const ItemControl = ({ itemName, itemCount }) => {
+	const dcrItem = useContext(dcrItemContext);
+	const incItem = useContext(incItemContext);
 
-	render() {
-		const { itemName } = this.props;
-		return (
-			<div className={itemName + "-container bgItem"}>
-				<span className="title"> {itemName} </span>
-				<itemContext.Consumer>
-					{(value) => (
-						<BurgerControlButtons
-							itemName={itemName}
-							itemCount={value.filter((item) => item.itemName == itemName && item.count)}
-						/>
-					)}
-				</itemContext.Consumer>
-			</div>
-		);
-	}
-}
+	return (
+		<div className={itemName + "-container bgItem"}>
+			<span className="title"> {itemName} </span>
+			<button
+				className={(itemCount == 0 ? "disabled " : "") + itemName + " decrement-btn btn"}
+				onClick={() => dcrItem(itemName)}
+			>
+				Less
+			</button>
+			<button className={itemName + " increment-btn btn"} onClick={() => incItem(itemName)}>
+				More
+			</button>
+		</div>
+	);
+};
 
 export default ItemControl;

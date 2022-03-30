@@ -43,17 +43,17 @@ function App() {
 		setOrderPlaced(val);
 	};
 
-	useEffect(() => setTotalItems(() => items.reduce((total, item) => total + item.count, 0)), items);
+	useEffect(() => setTotalItems(items.reduce((total, item) => total + item.count, 0)), items);
 
 	const incrementItem = (itemName) =>
 		setItems((prevItemState) =>
-			prevItemState.map((item) => (item.itemName == itemName ? { ...item, count: item.count + 1 } : { ...item }))
+			prevItemState.map((item) => (item.itemName == itemName ? { ...item, count: item.count + 1 } : item))
 		);
 
 	const decrementItem = (itemName) =>
 		setItems((prevItemState) =>
 			prevItemState.map((item) =>
-				item.itemName == itemName && item.count > 0 ? { ...item, count: item.count - 1 } : { ...item }
+				item.itemName == itemName && item.count > 0 ? { ...item, count: item.count - 1 } : item
 			)
 		);
 
@@ -78,7 +78,7 @@ function App() {
 		</>
 	) : (
 		<>
-			<Header totalItems={totalItems} />
+			<Header />
 			<itemContext.Provider value={items}>
 				<incItemContext.Provider value={incrementItem}>
 					<dcrItemContext.Provider value={decrementItem}>

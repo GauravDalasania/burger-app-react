@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import ItemControl from "./ItemControl";
-import { itemContext } from "./../../App";
 import Popup from "../Shared/Popup";
+import { itemContext } from "./../../App";
+import "./Footer.scss";
+import ItemControl from "./ItemControl";
 
 function BurgerControl({ totalItems, orderPlaced }) {
 	const INITIAL_PRICE = 4;
@@ -23,7 +24,7 @@ function BurgerControl({ totalItems, orderPlaced }) {
 			<div className="price-details">Current Price: $ {price}</div>
 			<div className="items-container">
 				{items.map((bgItem, index) => (
-					<ItemControl key={index} itemName={bgItem.itemName} />
+					<ItemControl key={index} itemName={bgItem.itemName} itemCount={bgItem.count} />
 				))}
 			</div>
 			<div className="order-button">
